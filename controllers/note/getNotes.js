@@ -3,10 +3,10 @@ const { noteModel } = require('../../models');
 
 const getNotes = async (user) => {
     return new Promise(async (resolve, reject) => {
-        noteModel.find({author: user._id}, {_id: 1}, (err, res) => {
+        noteModel.find({ author: user._id }, (err, res) => {
             if (err) reject(err);
             resolve(res);
-        }).select({ _id: 0, updatedAt: 0, createdAt: 0, __v: 0 });
+        }).select({ updatedAt: 0, createdAt: 0, __v: 0 });
     })
 }
 
