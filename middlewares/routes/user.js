@@ -27,7 +27,7 @@ userRoute.post('/register', (req, res) => {
     user.token = user.generateJWT();
     res.json(user.toAuthJSON()).send();
 }).post('/validate', (req, res) => {
-    if (!req.user)
+    if (req.user)
         res.status(200).send('Authorized');
     console.log('req.user');
     console.log(req.user);
