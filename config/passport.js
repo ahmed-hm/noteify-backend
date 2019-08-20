@@ -25,6 +25,7 @@ passport.use(new jwtStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: secretKey
 }, (payload, done) => {
+    console.log('inside passport config');
     userModel.findOne({ email: payload.email })
         .then(user => {
             const now = new Date();

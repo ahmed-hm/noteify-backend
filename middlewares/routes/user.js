@@ -29,6 +29,8 @@ userRoute.post('/register', (req, res) => {
 }).post('/validate', (req, res) => {
     if (!req.user)
         res.status(200).send('Authorized');
+    console.log('req.user');
+    console.log(req.user);
     res.status(401).send('Unauthorized');
 }).get('/current', (req, res) => {
 });
