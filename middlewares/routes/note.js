@@ -13,7 +13,7 @@ noteRoute.post('/add', (req, res) => {
     note.dateModified = req.body.dateModified;
     addNote(note).then(note => {
         console.log('note saved, UUID = ' + note.id);
-        res.json({ 'id': note.id }).send();
+        res.json({ '_id': note.id }).send();
     }).catch(err => {
         console.log(err);
         res.status(404).send('error occured while saving note');
@@ -26,7 +26,7 @@ noteRoute.post('/add', (req, res) => {
     const dateModified = req.body.dateModified;
     updateNote(id, title, body, dateModified, req.user).then(note => {
         console.log('note updated, UUID = ' + note.id);
-        res.json({ 'id': note.id }).send();
+        res.json({ '_id': note.id }).send();
     }).catch(err => {
         console.log(err);
         res.status(404).send('error occured while updating note');
@@ -52,7 +52,7 @@ noteRoute.post('/add', (req, res) => {
     console.log('note delete request received, id = ' + req.query.id);
     deleteNote(req.query.id, req.user).then(note => {
         console.log('note deleted, UUID = ' + note.id);
-        res.json({ 'id': note.id }).send();
+        res.json({ '_id': note.id }).send();
     }).catch(err => {
         console.log(err);
         res.status(404).send('error occured while deleting note');
