@@ -4,6 +4,8 @@ const passport = require('passport');
 
 const { loginUser, registerUser, currentUser } = require('../../controllers/user');
 
+userRoute.use('/validate', passport.authenticate('jwt', { session: false }));
+
 userRoute.post('/register', (req, res) => {
     if (!req.body.email || !req.body.password)
         return res.status(422).send('missing email or password or both');
@@ -24,8 +26,11 @@ userRoute.post('/register', (req, res) => {
     console.log(user);
     user.token = user.generateJWT();
     res.json(user.toAuthJSON()).send();
+}).post('/validate', (req, res) => {
+    if (!req.user)
+        res.status(200).send('Authorized');
+    res.status(401).send('Unauthorized');
 }).get('/current', (req, res) => {
-    // to do
-})
+});
 
 module.exports = { userRoute };
