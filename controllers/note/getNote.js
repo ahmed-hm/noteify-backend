@@ -3,7 +3,7 @@ const { noteModel } = require('../../models');
 
 const getNote = async (id, user) => {
     return new Promise(async (resolve, reject) => {
-        noteModel.findOne({ id: id, author: user._id }, (err, res) => {
+        noteModel.findOne({ _id: id, author: user._id }, (err, res) => {
             if (err) reject(err);
             // console.log(ssn);
             resolve(res);
