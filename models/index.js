@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const dbuser = process.env.dbUser;
 const dbpassword = process.env.dbPassword;
-const connectionString = `mongodb://${dbuser}:${dbpassword}@ds129770.mlab.com:29770/note-ify`; //get connection string from mlab database
+const connectionString = `mongodb+srv://${dbuser}:${dbpassword}@noteify-cluster.9yfpy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`; //get connection string from mlab database
 mongoose.connect(connectionString, { useNewUrlParser: true });
 
 mongoose.Promise = global.Promise;
