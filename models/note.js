@@ -12,6 +12,9 @@ noteSchema = schema({
     },
     title: String,
     body: String,
+    alarmDate: {type:Date, required: false},
+    tag: {type:String, required: false},
+    isDone: {type:Boolean, default: false},
     dateCreated: {
         type: String,
         require: true
