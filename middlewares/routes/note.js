@@ -11,8 +11,8 @@ noteRoute.post('/add', (req, res) => {
     note.body = req.body.body ?? '';
     note.dateCreated = req.body.dateCreated ?? new Date().toISOString();
     note.dateModified = req.body.dateModified ?? new Date().toISOString();
-    note.alarmDate = req.body.dateModified;
-    note.tag = req.body.tag;
+    note.alarmDate = req.body.alarmDate ?? null;
+    note.tag = req.body.tag ?? null;
     note.isDone = req.body.isDone;
 
     addNote(note).then(note => {
