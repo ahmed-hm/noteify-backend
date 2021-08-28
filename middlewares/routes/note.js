@@ -47,7 +47,6 @@ noteRoute.post('/add', (req, res) => {
         res.status(404).send('error occured while fetching note');
     })
 }).delete('/delete', (req, res) => {
-    console.log('note delete request received, id = ' + req.query.id);
     deleteNote(req.query.id, req.user).then(note => {
         console.log('note deleted, UUID = ' + note.id);
         res.json({ '_id': note.id }).send();
@@ -56,7 +55,6 @@ noteRoute.post('/add', (req, res) => {
         res.status(404).send('error occured while deleting note');
     })
 }).delete('/deleteAll', (req, res) => {
-    console.log('note delete request received, id = ' + req.query.id);
     deleteAllNotes(req.user).then(note => {
         res.json({ 'message': 'success' }).send();
     }).catch(err => {
