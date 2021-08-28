@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { noteModel } = require('../../models');
 
-const updateNote = async (id, user, ...rest) => {
+const updateNote = async ({ id, user, ...rest }) => {
 	return new Promise(async (resolve, reject) => {
 		await noteModel.findOneAndUpdate(
 			{ _id: id, author: user._id },
