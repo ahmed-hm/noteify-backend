@@ -23,11 +23,10 @@ noteRoute.post('/add', (req, res) => {
         res.status(404).send('error occured while saving note');
     })
 }).put('/update', (req, res) => {
-    const query = req.params.query;
     const id = req.body.id;
     const title = req.body.title;
     const body = req.body.body;
-    const dateModified = req.body.dateModified;
+    const dateModified = req.body.dateModified?? new Date().toISOString();
     const alarmDate = req.body.dateModified;
     const tag = req.body.tag;
     const isDone = req.body.isDone;
@@ -47,7 +46,7 @@ noteRoute.post('/add', (req, res) => {
         res.status(404).send('error occured while fetching notes');
     })
 }).get('/get', (req, res) => {
-    getNote(req.body.id, req.user).then(note => {
+    getNote(req.query.id, req.user).then(note => {
         console.log('note fetched, UUID = ' + note.id);
         res.status(200).send(note);
     }).catch(err => {
@@ -55,7 +54,6 @@ noteRoute.post('/add', (req, res) => {
         res.status(404).send('error occured while fetching note');
     })
 }).delete('/delete', (req, res) => {
-    const query = req.params.query;
     console.log('note delete request received, id = ' + req.query.id);
     deleteNote(req.query.id, req.user).then(note => {
         console.log('note deleted, UUID = ' + note.id);
