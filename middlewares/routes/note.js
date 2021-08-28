@@ -1,7 +1,7 @@
 const express = require('express');
 const noteRoute = express.Router();
 
-const { addNote, updateNote, deleteNote, getNote, getNotes } = require('../../controllers/note');
+const { addNote, updateNote, deleteNote, getNote, getNotes, deleteAllNotes } = require('../../controllers/note');
 
 noteRoute.post('/add', (req, res) => {
     console.log(req.body);
@@ -23,14 +23,7 @@ noteRoute.post('/add', (req, res) => {
         res.status(404).send('error occured while saving note');
     })
 }).put('/update', (req, res) => {
-    const id = req.body.id;
-    const title = req.body.title;
-    const body = req.body.body;
-    const dateModified = req.body.dateModified?? new Date().toISOString();
-    const alarmDate = req.body.dateModified;
-    const tag = req.body.tag;
-    const isDone = req.body.isDone;
-    updateNote(id, req.user, title, body, dateModified, alarmDate, tag, isDone ).then(note => {
+    updateNote({id:req.body.id, user:req.user, ...req.body} ).then(note => {
         console.log('note updated, UUID = ' + note.id);
         res.json({ '_id': note.id }).send();
     }).catch(err => {
@@ -58,6 +51,14 @@ noteRoute.post('/add', (req, res) => {
     deleteNote(req.query.id, req.user).then(note => {
         console.log('note deleted, UUID = ' + note.id);
         res.json({ '_id': note.id }).send();
+    }).catch(err => {
+        console.log(err);
+        res.status(404).send('error occured while deleting note');
+    })
+}).delete('/deleteAll', (req, res) => {
+    console.log('note delete request received, id = ' + req.query.id);
+    deleteAllNotes(req.user).then(note => {
+        res.json({ 'message': 'success' }).send();
     }).catch(err => {
         console.log(err);
         res.status(404).send('error occured while deleting note');
