@@ -4,7 +4,7 @@ const registerUser = async (user) => {
     return new Promise(async (resolve, reject) => {
         const record = new userModel(user);
         record.setPassword(user.password);
-        await record.save()
+        record.save()
             .then(doc => {
                 resolve(doc);
             })

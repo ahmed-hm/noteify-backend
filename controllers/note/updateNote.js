@@ -3,7 +3,7 @@ const { noteModel } = require('../../models');
 
 const updateNote = async ({ id, user, ...rest }) => {
 	return new Promise(async (resolve, reject) => {
-		await noteModel.findOneAndUpdate(
+		noteModel.findOneAndUpdate(
 			{ _id: id, author: user._id },
 			rest,
 			{ new: true, useFindAndModify: false },
