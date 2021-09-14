@@ -23,7 +23,7 @@ noteRoute.post('/add', (req, res) => {
         res.status(404).send('error occured while saving note');
     })
 }).put('/update', (req, res) => {
-    updateNote({id:req.body.id, user:req.user, ...req.body} ).then(note => {
+    updateNote({id:req.body._id, user:req.user, ...req.body} ).then(note => {
         console.log('note updated, UUID = ' + note.id);
         res.json({ '_id': note.id }).send();
     }).catch(err => {
